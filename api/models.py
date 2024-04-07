@@ -11,10 +11,9 @@ class User(AbstractUser):
     # first_name = models.CharField(max_length=100, null=True, blank=True) 
     # last_name = models.CharField(max_length=100, null=True, blank=True)
 
-
 class Product(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
-    employees = models.ForeignKey("Employee", on_delete=models.SET_NULL, null=True)
+    employees = models.ForeignKey("Employee", on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=200, null=True, blank=True)
     # image = models.ImageField(null=True, blank=True, default='/placeholder.jpg')
     brand = models.CharField(max_length=200, null=True, blank=True)

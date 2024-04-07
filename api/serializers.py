@@ -1,9 +1,8 @@
 from rest_framework import serializers
-from api.models import User,Product, Customer, Employee
+from api.models import User,Product, Customer, Employee, Order, OrderItem
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import make_password
-
 
 def getUser(request):
     user = request.user
@@ -60,4 +59,9 @@ class CustomerSerializer(serializers.ModelSerializer):
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
+        fields = '__all__'
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
         fields = '__all__'

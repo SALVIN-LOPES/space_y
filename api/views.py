@@ -6,8 +6,10 @@ from rest_framework.response import Response
 from api.models import *
 from api.serializers import *
 from rest_framework import generics
-from api.permissions import IsEmployeeUser
+from api.permissions import IsEmployeeUser, IsCustomerUser
 from rest_framework.permissions import IsAdminUser
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 
 # decode password -> 
 from django.contrib.auth.hashers import make_password
@@ -33,9 +35,9 @@ class UserDetailsUpdateDestroy( generics.RetrieveAPIView, generics.UpdateAPIView
     # permission_classes = [IsAdminUser]
     lookup_field = 'pk'
 
-
 # perform crud on customers if yor are employee member ->
 class ProductListCreate( generics.ListAPIView, generics.CreateAPIView):
+    # authentication_classes = (JWTAuthentication)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsEmployeeUser]
@@ -68,4 +70,15 @@ class EmployeeDetailsUpdateDestroy( generics.RetrieveAPIView, generics.UpdateAPI
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     permission_classes = [IsAdminUser]
+    lookup_field = 'pk'
+
+class OrderListCreate(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [IsCustomerUser]
+
+class OrderDetailsUpdateDestroy( generics.RetrieveAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [IsCustomerUser]
     lookup_field = 'pk'

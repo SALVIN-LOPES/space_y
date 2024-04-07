@@ -5,4 +5,6 @@ admin.site.register(User)
 admin.site.register(Product)
 admin.site.register(Customer)
 admin.site.register(Employee)
+admin.site.register(Order)
+admin.site.register(OrderItem)
 

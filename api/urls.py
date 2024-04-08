@@ -22,7 +22,7 @@ urlpatterns = [
 
     # path('customers/', views.CustomerList.as_view(), name = 'customers'),
     path('employees/', views.EmployeeListCreate.as_view(), name = 'employees_list_create'),
-    path('employees/', views.EmployeeDetailsUpdateDestroy.as_view(), name = 'employees_detail_update_delete'),
+    path('employees/<int:pk>/', views.EmployeeDetailsUpdateDestroy.as_view(), name = 'employees_detail_update_delete'),
 
     path('order/', views.OrderListCreate.as_view(), name = 'order_list_create'),
     path('order/<int:pk>/', views.OrderDetailsUpdateDestroy.as_view(), name = 'order_detail_update_delete'),

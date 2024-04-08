@@ -18,10 +18,30 @@ from django.contrib.auth.hashers import make_password
 def routes(request):
     routes = {
         "routes" : "https://space-y-2q6d.onrender.com/api/routes/",
-        "Employees": "localhost/api/employees/",
-        "customers" : "localhost/api/customers/",
-        "products" : "localhost/api/products/"
 
+        # PRODUCTS (send token : only employees can create products)
+            # GET - POST
+        "products" : "https://space-y-2q6d.onrender.com/api/products/",
+            # PUT - DELETE
+        "products" : "https://space-y-2q6d.onrender.com/api/products/<int:pk>/",
+        
+        # CUSTOMERS 
+            # GET - POST
+        "customers" : "https://space-y-2q6d.onrender.com/api/customers/",
+            # PUT - DELETE
+        "customers" : "https://space-y-2q6d.onrender.com/api/customers/<int:pk>/",
+
+        # EMPLOYEES (only isAdminUser can fetch employees)
+            # GET - POST
+        "employees" : "https://space-y-2q6d.onrender.com/api/employees/",
+            # PUT - DELETE
+        "employees" : "https://space-y-2q6d.onrender.com/api/employees/<int:pk>/",
+
+        # USER (while creating user : define is_employee || is_customer && no bearer token)
+            # GET - POST
+        "users" : "https://space-y-2q6d.onrender.com/api/users/",
+            # PUT - DELETE
+        "users" : "https://space-y-2q6d.onrender.com/api/users/<int:pk>/",
     }
     return Response(routes)
 

@@ -17,24 +17,26 @@ environ.Env().read_env()
 
 
 # db secure connection method : 
-with open(os.path.join(BASE_DIR, 'secrets.json')) as secrets_file:
-    secrets = json.load(secrets_file)
+# with open(os.path.join(BASE_DIR, 'secrets.json')) as secrets_file:
+#     secrets = json.load(secrets_file)
 
-def get_secret(setting, secrets=secrets):
-    """Get secret setting or fail with ImproperlyConfigured"""
-    try:
-        return secrets[setting]
-    except KeyError:
-        raise ImproperlyConfigured("Set the {} setting".format(setting))
+# def get_secret(setting, secrets=secrets):
+#     """Get secret setting or fail with ImproperlyConfigured"""
+#     try:
+#         return secrets[setting]
+#     except KeyError:
+#         raise ImproperlyConfigured("Set the {} setting".format(setting))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-vgy$l&zh!z+h7fy&xt4^x8l(1xbd^7#^ht)1e513qoq%)mqyzd'
+SECRET_KEY = 'django-insecure-vgy$l&zh!z+h7fy&xt4^x8l(1xbd^7#^ht)1e513qoq%)mqyzd'
+DATABASE_URL = 'postgres://spacey_r5j0_user:tGWMNBlbQn2rqqinFR4zT7zcXy3MXNBe@dpg-co9oh2djm4es73b2p0ag-a.oregon-postgres.render.com/spacey_r5j0'
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_secret('SECRET_KEY')
+# SECRET_KEY = get_secret('SECRET_KEY')
+# SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -157,7 +159,7 @@ DATABASES={
 # render postgres database (Live)
 import dj_database_url
 DATABASES = {
-    'default' : dj_database_url.parse(get_secret('DATABASE_URL'))
+    'default' : dj_database_url.parse(DATABASE_URL)
 
 }
 

@@ -8,6 +8,14 @@ from django.core.exceptions import ImproperlyConfigured
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import environ
+
+env = environ.Env()
+
+environ.Env().read_env()
+
+
+
 # db secure connection method : 
 with open(os.path.join(BASE_DIR, 'secrets.json')) as secrets_file:
     secrets = json.load(secrets_file)
@@ -29,9 +37,9 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = get_secret('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'api.User'
 
@@ -133,6 +141,7 @@ WSGI_APPLICATION = 'spacey.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+'''
 DATABASES={
    'default':{
       'ENGINE':get_secret('DB_ENGINE'),
@@ -142,6 +151,14 @@ DATABASES={
       'HOST':get_secret('DB_HOST'),
       'PORT':get_secret('DB_PORT'),
    }
+}
+'''
+
+# render postgres database (Live)
+import dj_database_url
+DATABASES = {
+    'default' : dj_database_url.parse(get_secret('DATABASE_URL'))
+
 }
 
 

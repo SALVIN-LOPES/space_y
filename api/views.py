@@ -17,6 +17,7 @@ from django.contrib.auth.hashers import make_password
 @api_view(['GET'])
 def routes(request):
     routes = {
+        "routes" : "https://space-y-2q6d.onrender.com/api/routes/",
         "Employees": "localhost/api/employees/",
         "customers" : "localhost/api/customers/",
         "products" : "localhost/api/products/"
